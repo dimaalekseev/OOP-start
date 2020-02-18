@@ -71,16 +71,59 @@ class Account:
               self.__amount, "\nCurrancy: ", self.__currancy)
 
     def get_cash(self):
-        return(self.__amount)
+        money_get = int(input("How much money u want to take?"))
+        self.__amount -= money_get
+        return self.__amount
 
-    def set_cash(self, balance):
-        balance = int(input("Bal: "))
-        return(self.__amount-balance)
+    def set_cash(self, money_set):
+        money_set = int(input("How much u want to add?"))
+        self.__amount += money_set
+        return self.__amount
 
 
-amount = int(input("Enter money: "))
-currancy = input("Enter currancy:UAH USD EUR => ")
-card_number = randint(1000000, 9999999)
+# amount = int(input("Enter money: "))
+# currancy = input("Enter currancy:UAH USD EUR => ")
+# card_number = randint(1000000, 9999999)
 
-credit_card = Account(card_number, amount, currancy)
-credit_card.show_info()
+# credit_card = Account(card_number, amount, currancy)
+# credit_card.show_info()
+
+while True:
+    print("Welcome to the BANK")
+    question1 = int(input(
+        "MENU\n1. Register a new account\n2. Show account\n3. Take money\n4. Add money\n0. EXIT\n\tYour action: "))
+    if question1 == 1:
+        amount = int(input("How much money?:\n"))
+        question2 = int(
+            input("Choose currancy\n1.USD\n2.EURO\n3.UAH\n4.RUB\nYour choice: "))
+        if question2 == 1:
+            currancy = "USD"
+        elif question2 == 2:
+            currancy = "EURO"
+        elif question2 == 3:
+            currancy = "UAH"
+        elif question2 == 4:
+            currancy = "RUB"
+
+        card_number = randint(10000000000000000, 99999999999999999)
+        input("ACCOUNT CREATED\nTap Enter to go to menu")
+    elif question1 == 2:
+        credit_card = Account(card_number, amount, currancy)
+        credit_card.show_info()
+        input("Enter for exit in menu")
+        print("*************************************")
+    elif question1 == 3:
+        amount = credit_card.get_cash()
+        print("_________________________")
+        print("Balance:", amount, currancy)
+        print("_________________________")
+    elif question1 == 4:
+        amount = credit_card.set_cash()
+        print("_________________________")
+        print("Balance:", amount, currancy)
+        print("_________________________")
+    elif question1 == 0:
+        break
+    else:
+        print("What's wrong! BYE!")
+        break
